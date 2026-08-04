@@ -12,14 +12,16 @@
     font:22px monospace;
     display:flex;
     justify-content:center;
-    align-items:center;
-    height:100vh;
-    overflow:hidden;
+    align-items:flex-start; /* Corrigé */
+    min-height:100vh; /* Corrigé */
+    overflow-y:auto; /* Corrigé : autorise le scroll */
   }
- .wrap{
+.wrap{
     max-width:900px;
     padding:3rem;
     text-align:center;
+    width: 100%; /* ajouté pour mobile */
+    box-sizing: border-box;
   }
   h1{
     font:700 7rem sans-serif;
@@ -35,6 +37,113 @@
     top:40px;
     width:18px;
     height:18px;
+    border-radius:50%;
+    background:#c00;
+    box-shadow:0 0 18px #f33;
+    animation:b 1s infinite;
+  }
+  #screen{
+    white-space: pre-wrap; /* important pour les \n */
+    text-align: left;
+    min-height: 10rem;
+  }
+.cursor{
+    animation:b 1s infinite;
+  }
+  @keyframes b{50%{opacity:.2}}
+
+  #replay{
+    margin-top:2rem;
+    padding: 10px 20px;
+    font:22px monospace;
+    background:#111;
+    color:#f6f2ea;
+    border:none;
+    cursor:pointer;
+  }
+  #replay:hover{
+    background:#333;
+  }
+
+  /* Petit fix pour mobile */
+  @media (max-width: 768px) {
+    h1 { font-size: 4rem; }
+    h2 { font-size: 2rem; }
+    #led { left: 20px; top: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="led"></div>
+
+<div class="wrap">
+  <h1>O+O</h1>
+  <h2>Entrelacs</h2>
+  <div id="screen"></div><span class="cursor">|</span>
+  <button id="replay" onclick="lancer()">Relancer</button>
+</div>
+
+<script>
+  const l = [
+    "Recherche de l'auteur...",
+    "",
+    "Auteur localisé.",
+    "",
+    "Statut : ● occupé à réparer quelques entrelacs",
+    "",
+    "📞 Décrochage...",
+    "",
+    "Bonjour.",
+    "",
+    "Vous êtes bien sur le répondeur de O+O/Entrelacs.",
+    "",
+    "Personne ne peut vous répondre pour le moment.",
+    "",
+    "Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...",
+    "",
+    "...et d'avancer quelques travaux de couture laissés en suspens.",
+    "",
+    "Merci de votre patience.",
+    "",
+    "Retour prévu : dimanche prochain.",
+    "",
+    "",
+    "Biiiiiiiiiiiiip.",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ];
+
+  const s = document.getElementById('screen');
+  let i = 0;
+  let timer;
+
+  function afficherLigne() {
+    if (i < l.length) {
+      s.textContent += l[i] + "\n";
+      i++;
+      s.scrollTop = s.scrollHeight; /* auto-scroll vers le bas */
+      const delai = l[i-1].includes("Biiiiip")? 2000 : 900;
+      timer = setTimeout(afficherLigne, delai);
+    }
+  }
+
+  function lancer() {
+    clearTimeout(timer);
+    s.textContent = "";
+    i = 0;
+    afficherLigne();
+  }
+
+  lancer(); // lance au démarrage
+</script>
+
+</body>
+</html>    height:18px;
     border-radius:50%;
     background:#c00;
     box-shadow:0 0 18px #f33;
