@@ -1,28 +1,26 @@
-html {
-  background: #f6f2ea;
-}
-
 body {
   margin: 0;
   background: #f6f2ea;
   color: #111;
   font: 22px monospace;
-  min-height: 100vh;
+  padding: 3rem;
 }
 
 .wrap {
   max-width: 900px;
-  padding: 3rem;
-  margin: 0 auto; /* centre le bloc sans flex */
+  margin: 0 auto;
 }
 
 h1 {
   font: 700 7rem sans-serif;
   margin: 0;
+  text-align: center;
 }
 
 h2 {
   font: 300 3rem sans-serif;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 #led {
@@ -35,6 +33,33 @@ h2 {
   background: #c00;
   box-shadow: 0 0 18px #f33;
   animation: b 1s infinite;
+}
+
+#screen {
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.cursor {
+  animation: b 1s infinite;
+}
+
+@keyframes b {
+  50% { opacity: .2 }
+}
+
+#replay {
+  margin-top: 2rem;
+  padding: 10px 20px;
+  font: 22px monospace;
+  background: #111;
+  color: #f6f2ea;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}  animation: b 1s infinite;
 }
 
 .cursor {
