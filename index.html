@@ -4,7 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O+O/Entrelacs - Répondeur</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+  margin:0;
+  padding:3rem;
+  background:#f6f2ea;
+  color:#111;
+  font:22px monospace;
+}
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+h1{font:700 7rem sans-serif;margin:0;}
+h2{font:300 3rem sans-serif;margin-bottom:2rem;}
+#led{
+  position:fixed;left:40px;top:40px;
+  width:18px;height:18px;border-radius:50%;
+  background:#c00;box-shadow:0 0 18px #f33;
+  animation:b 1s infinite;
+}
+#screen{white-space:pre-wrap;text-align:left;min-height:10rem;}
+.cursor{animation:b 1s infinite;}
+@keyframes b{50%{opacity:.2}}
+#replay{margin-top:2rem;padding:10px 20px;font:22px monospace;background:#111;color:#f6f2ea;border:none;cursor:pointer;}
+</style>
 </head>
 <body>
 
@@ -18,62 +43,11 @@
 </div>
 
 <script>
-  const l = [
-    "Recherche de l'auteur...",
-    "",
-    "Auteur localisé.",
-    "",
-    "Statut : ● occupé à réparer quelques entrelacs",
-    "",
-    "📞 Décrochage...",
-    "",
-    "Bonjour.",
-    "",
-    "Vous êtes bien sur le répondeur de O+O/Entrelacs.",
-    "",
-    "Personne ne peut vous répondre pour le moment.",
-    "",
-    "Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...",
-    "",
-    "...et d'avancer quelques travaux de couture laissés en suspens.",
-    "",
-    "Merci de votre patience.",
-    "",
-    "Retour prévu : dimanche prochain.",
-    "",
-    "",
-    "Biiiiiiiiip.",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  ];
-
-  const s = document.getElementById('screen');
-  let i = 0;
-  let timer;
-
-  function afficherLigne() {
-    if (i < l.length) {
-      s.textContent += l[i] + "\n";
-      i++;
-      window.scrollTo(0, document.body.scrollHeight); /* scroll auto */
-      const delai = l[i-1].includes("Biiiiip")? 2000 : 900;
-      timer = setTimeout(afficherLigne, delai);
-    }
-  }
-
-  function lancer() {
-    clearTimeout(timer);
-    s.textContent = "";
-    i = 0;
-    afficherLigne();
-  }
-
-  lancer();
+const l=["Recherche de l'auteur...","","Auteur localisé.","","Statut : ● occupé à réparer quelques entrelacs","","📞 Décrochage...","","Bonjour.","","Vous êtes bien sur le répondeur de O+O/Entrelacs.","","Personne ne peut vous répondre pour le moment.","","Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...","","...et d'avancer quelques travaux de couture laissés en suspens.","","Merci de votre patience.","","Retour prévu : dimanche prochain.","","","Biiiiiiiiiiiiip.","","","","","",""];
+const s=document.getElementById('screen');let i=0;let timer;
+function afficherLigne(){if(i<l.length){s.textContent+=l[i]+"\n";i++;window.scrollTo(0,document.body.scrollHeight);const delai=l[i-1].includes("Biiiiip")?2000:900;timer=setTimeout(afficherLigne,delai);}}
+function lancer(){clearTimeout(timer);s.textContent="";i=0;afficherLigne();}
+lancer();
 </script>
-
 </body>
 </html>
