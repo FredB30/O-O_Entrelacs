@@ -42,7 +42,7 @@
     "Retour prévu : dimanche prochain.",
     "",
     "",
-    "Biiiiiiiiiiiiip.",
+    "Biiiiiiiiip.",
     "",
     "",
     "",
@@ -59,7 +59,7 @@
     if (i < l.length) {
       s.textContent += l[i] + "\n";
       i++;
-      s.scrollTop = s.scrollHeight; /* auto-scroll vers le bas */
+      window.scrollTo(0, document.body.scrollHeight); /* scroll auto */
       const delai = l[i-1].includes("Biiiiip")? 2000 : 900;
       timer = setTimeout(afficherLigne, delai);
     }
@@ -72,106 +72,7 @@
     afficherLigne();
   }
 
-  lancer(); // lance au démarrage
-</script>
-
-</body>
-</html>    height:18px;
-    border-radius:50%;
-    background:#c00;
-    box-shadow:0 0 18px #f33;
-    animation:b 1s infinite;
-  }
-  #screen{
-    white-space: pre-wrap; /* important pour les \n */
-    text-align: left;
-    min-height: 10rem;
-  }
- .cursor{
-    animation:b 1s infinite;
-  }
-  @keyframes b{50%{opacity:.2}}
-
-  #replay{
-    margin-top:2rem;
-    padding: 10px 20px;
-    font:22px monospace;
-    background:#111;
-    color:#f6f2ea;
-    border:none;
-    cursor:pointer;
-  }
-  #replay:hover{
-    background:#333;
-  }
-</style>
-</head>
-<body>
-
-<div id="led"></div>
-
-<div class="wrap">
-  <h1>O+O</h1>
-  <h2>Entrelacs</h2>
-  <div id="screen"></div><span class="cursor">|</span>
-  <button id="replay" onclick="lancer()">Relancer</button>
-</div>
-
-<script>
-  const l = [
-    "Recherche de l'auteur...",
-    "",
-    "Auteur localisé.",
-    "",
-    "Statut : ● occupé à réparer quelques entrelacs",
-    "",
-    "📞 Décrochage...",
-    "",
-    "Bonjour.",
-    "",
-    "Vous êtes bien sur le répondeur de O+O/Entrelacs.",
-    "",
-    "Personne ne peut vous répondre pour le moment.",
-    "",
-    "Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...",
-    "",
-    "...et d'avancer quelques travaux de couture laissés en suspens.",
-    "",
-    "Merci de votre patience.",
-    "",
-    "Retour prévu : dimanche prochain.",
-    "",
-    "",
-    "Biiiiiiiiiiiiip.",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  ];
-
-  const s = document.getElementById('screen');
-  let i = 0;
-  let timer;
-
-  function afficherLigne() {
-    if (i < l.length) {
-      s.textContent += l[i] + "\n";
-      i++;
-      const delai = l[i-1].includes("Biiiiip")? 2000 : 900;
-      timer = setTimeout(afficherLigne, delai);
-    }
-  }
-
-  function lancer() {
-    clearTimeout(timer);
-    s.textContent = "";
-    i = 0;
-    afficherLigne();
-  }
-
-  lancer(); // lance au démarrage
+  lancer();
 </script>
 
 </body>
