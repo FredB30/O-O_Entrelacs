@@ -53,25 +53,21 @@ function afficherLigne(){
     i++;
     window.scrollTo(0,document.body.scrollHeight);
     setTimeout(afficherLigne,900);
+  } else {
+    // On débloque le bouton à la fin du texte
+    btn.disabled = false;
+    btn.textContent = "📞 Raccrocher et Relancer";
   }
 }
 
 function lancer(){
   btn.disabled = true;
   btn.textContent = "🔴 En cours...";
-
   s.textContent="";
   i=0;
 
-  // L'audio part car c'est suite à un clic
   const audio = new Audio('repondeur.mp3');
-  audio.play().catch(()=>{console.log("audio bloqué")});
-
-  // Quand l'audio est fini, on réactive le bouton
-  audio.onended = () => {
-    btn.disabled = false;
-    btn.textContent = "📞 Raccrocher et Relancer";
-  }
+  audio.play().catch(()=>{});
 
   afficherLigne();
 }
