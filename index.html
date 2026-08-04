@@ -28,52 +28,66 @@ h2{font-size:48px!important; font-weight:300; font-family:sans-serif; margin-bot
 </div>
 
 <script>
-const l=[
-"Recherche de l'auteur...","",
-"Auteur localisé.","",
-"Statut : ● occupé à réparer quelques entrelacs","",
-"📞 Décrochage...","",
-"Bonjour.","",
-"Vous êtes bien sur le répondeur de O+O/Entrelacs.","",
-"Personne ne peut vous répondre pour le moment.","",
-"Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...","",
-"...et d'avancer quelques travaux de couture laissés en suspens.","",
-"Merci de votre patience.","",
-"Retour prévu : dimanche prochain.","",
-"",""
+const audio = new Audio('repondeur.mp3');
+
+// TIMINGS CALES SUR TON MP3 de 39s
+const script = [
+  {txt:"Recherche de l'auteur...", t:1500},
+  {txt:"", t:2300},
+  {txt:"Auteur localisé.", t:3000},
+  {txt:"", t:3800},
+  {txt:"Statut : ● occupé à réparer quelques entrelacs", t:4500},
+  {txt:"", t:7000},
+  {txt:"📞 Décrochage...", t:7500},
+  {txt:"", t:8200},
+  {txt:"Bonjour.", t:8500},
+  {txt:"", t:9200},
+  {txt:"Vous êtes bien sur le répondeur de O+O/Entrelacs.", t:9500},
+  {txt:"", t:12200},
+  {txt:"Personne ne peut vous répondre pour le moment.", t:12500},
+  {txt:"", t:15200},
+  {txt:"Le titulaire de cette ligne s'est absenté afin de faire baisser son niveau de glutamate...", t:15500},
+  {txt:"", t:19000},
+  {txt:"...et d'avancer quelques travaux de couture laissés en suspens.", t:19300},
+  {txt:"", t:22500},
+  {txt:"Merci de votre patience.", t:22800},
+  {txt:"", t:25500},
+  {txt:"Retour prévu : dimanche prochain.", t:34000},
+  {txt:"", t:36500},
 ];
 
 const s=document.getElementById('screen');
 const btn=document.getElementById('replay');
-let i=0;
-
-function afficherLigne(){
-  if(i<l.length){
-    s.textContent+=l[i]+"\n";
-    i++;
-    window.scrollTo(0,document.body.scrollHeight);
-    setTimeout(afficherLigne,900);
-  } else {
-    // On débloque le bouton à la fin du texte
-    btn.disabled = false;
-    btn.textContent = "📞 Raccrocher et Relancer";
-  }
-}
+let timeouts = [];
 
 function lancer(){
   btn.disabled = true;
   btn.textContent = "🔴 En cours...";
   s.textContent="";
-  i=0;
+  
+  timeouts.forEach(clearTimeout);
+  timeouts = [];
 
-  const audio = new Audio('repondeur.mp3');
+  audio.currentTime = 0;
   audio.play().catch(()=>{});
 
-  afficherLigne();
+  script.forEach(ligne => {
+    const to = setTimeout(() => {
+      s.textContent += ligne.txt + "\n";
+      window.scrollTo(0,document.body.scrollHeight);
+    }, ligne.t);
+    timeouts.push(to);
+  });
+
+  const fin = setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = "📞 Raccrocher et Relancer";
+  }, 39000);
+  timeouts.push(fin);
 }
 
 btn.onclick=lancer;
-lancer(); // 1er lancement auto, sans son
+lancer(); // 1er lancement auto : texte seul
 </script>
 </body>
 </html>
