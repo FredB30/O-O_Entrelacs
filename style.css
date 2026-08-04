@@ -1,17 +1,19 @@
+html {
+  background: #f6f2ea;
+}
+
 body {
   margin: 0;
   background: #f6f2ea;
   color: #111;
   font: 22px monospace;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Corrigé : commence en haut */
-  min-height: 100vh;       /* Corrigé : peut s'agrandir */
+  min-height: 100vh;
 }
 
 .wrap {
   max-width: 900px;
   padding: 3rem;
+  margin: 0 auto; /* centre le bloc sans flex */
 }
 
 h1 {
@@ -35,6 +37,15 @@ h2 {
   animation: b 1s infinite;
 }
 
+.cursor {
+  animation: b 1s infinite;
+}
+
+@keyframes b {
+  50% {
+    opacity: .2;
+  }
+}
 .cursor {
   animation: b 1s infinite;
 }
